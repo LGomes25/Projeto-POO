@@ -1,0 +1,43 @@
+====== Passo a Passo: Criação de Nova Branch no Git ======
+
+1. Após clonar o repositório do GitHub (https://github.com/LGomes25/Projeto-POO.git)
+
+2. Verifique a branch atual
+   Use o comando abaixo para ver a branch ativa:
+   
+   git branch
+
+3. Crie e mude para a nova branch
+   Crie uma nova branch e troque para ela:
+   git checkout -b <seu nome>
+  
+   Exemplo:
+   git checkout -b Leonardo
+
+====== Atualizando/trabalhando nos arquivos ======
+
+4. Faça suas alterações
+   Edite os arquivos do projeto conforme necessário e salve.
+
+5. Adicione as mudanças ao stage
+   Adicione os arquivos modificados ao controle do Git:
+   
+   git add .
+
+6. Faça o commit das alterações
+   Confirme as mudanças com uma mensagem clara:
+   
+   git commit -m "Descrição das alterações realizadas"
+
+7. Envie a nova branch para o repositório remoto
+   Envie a branch ao GitHub:
+   
+   git push -u origin <nome-da-branch>
+   
+   Exemplo:
+   git push -u origin Leonardo
+
+====== Verificando o GitHub ======
+
+8. Verifique no GitHub
+   Confirme que a nova branch está listada no repositório remoto.
