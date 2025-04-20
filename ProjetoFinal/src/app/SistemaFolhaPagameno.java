@@ -1,6 +1,6 @@
 package app;
 
-public class SisemaFolhaPagameno {
+public class SistemaFolhaPagameno {
 
 	public static void main(String[] args) {
 
