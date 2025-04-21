@@ -1,5 +1,8 @@
 package calculos;
 
-public class CalculoSalario {
 
+public class CalculoSalario{
+	
 }
+
+
