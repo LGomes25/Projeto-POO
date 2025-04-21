@@ -5,23 +5,22 @@ import java.time.LocalDate;
 public class Funcionario extends Pessoa {
 
 	//Atributos
-	private double salarioBruto;
-    private double descontoInss;
-    private double descontoIr;
+	private Double salarioBruto;
+    private Double descontoInss;
+    private Double descontoIr;
 	
     //Construtor
-    public Funcionario(String nome, String cpf, LocalDate dataNascimento, double salarioBruto, double descontoInss,
-			double descontoIr) {
-		super(nome, cpf, dataNascimento);
+    public Funcionario(Integer id, String nome, String cpf, LocalDate dataNascimento, Double salarioBruto) {
+		super(id, nome, cpf, dataNascimento);
 		this.salarioBruto = salarioBruto;
-		this.descontoInss = descontoInss;
-		this.descontoIr = descontoIr;
+		this.descontoInss = 0.;
+		this.descontoIr = 0.;
 	}
 
     //toString
 	@Override
 	public String toString() {
-		return "Salario Bruto: " + salarioBruto + ", Desconto INSS: " + descontoInss + ", Desconto IR: "
+		return super.toString() + "Sal. Bruto: " + salarioBruto + ", Desc. INSS: " + descontoInss + ", Desc. IR: "
 				+ descontoIr;
 	}
 
@@ -30,7 +29,7 @@ public class Funcionario extends Pessoa {
 		return salarioBruto;
 	}
 
-	public void setSalarioBruto(double salarioBruto) {
+	public void setSalarioBruto(Double salarioBruto) {
 		this.salarioBruto = salarioBruto;
 	}
 
@@ -38,7 +37,7 @@ public class Funcionario extends Pessoa {
 		return descontoInss;
 	}
 
-	public void setDescontoInss(double descontoInss) {
+	public void setDescontoInss(Double descontoInss) {
 		this.descontoInss = descontoInss;
 	}
 
@@ -46,7 +45,7 @@ public class Funcionario extends Pessoa {
 		return descontoIr;
 	}
 
-	public void setDescontoIr(double descontoIr) {
+	public void setDescontoIr(Double descontoIr) {
 		this.descontoIr = descontoIr;
 	}
 	
