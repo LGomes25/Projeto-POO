@@ -13,7 +13,7 @@ public class SistemaFolhaPagameno {
 
 	public static void main(String[] args) {
 		
-		System.out.println("Taiane");
+		System.out.println("Tem que aparecer");
 		
 		List<Pessoa> listaPessoas = new ArrayList<>();
 	    List<Funcionario> listaFuncionarios = new ArrayList<>();
