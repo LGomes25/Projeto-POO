@@ -10,15 +10,15 @@ public class Parentesco extends Pessoa{
 	private ParentescoEnum parentesco;
 
 	//Construtor
-	public Parentesco(String nome, String cpf, LocalDate dataNascimento, ParentescoEnum parentesco) {
-		super(nome, cpf, dataNascimento);
+	public Parentesco(Integer id, String nome, String cpf, LocalDate dataNascimento, ParentescoEnum parentesco) {
+		super(id, nome, cpf, dataNascimento);
 		this.parentesco = parentesco;
 	}
 
 	//toString
 	@Override
 	public String toString() {
-		return "Parentesco [parentesco=" + parentesco + "]";
+		return super.toString() + "Parentesco: " + parentesco;
 	}
 
 	//Getters Setters

@@ -5,12 +5,14 @@ import java.time.LocalDate;
 public abstract class Pessoa {
 
 	// Atributos
+	protected Integer id;
 	protected String nome;
 	protected String cpf;
 	protected LocalDate dataNascimento;
 
 	// Construtor
-	public Pessoa(String nome, String cpf, LocalDate dataNascimento) {
+	public Pessoa(Integer id, String nome, String cpf, LocalDate dataNascimento) {
+		this.id = id;
 		this.nome = nome;
 		this.cpf = cpf;
 		this.dataNascimento = dataNascimento;
@@ -19,7 +21,7 @@ public abstract class Pessoa {
 	//toString
 	@Override
 	public String toString() {
-		return "Nome: " + nome + ", cpf: " + cpf + ", Data Nascimento; " + dataNascimento;
+		return "Nome: " + nome + ", cpf: " + cpf + ", D. Nasc: " + dataNascimento;
 	}
 
 	// Getters Setters
@@ -47,4 +49,13 @@ public abstract class Pessoa {
 		this.dataNascimento = dataNascimento;
 	}
 
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+	
+	
 }
