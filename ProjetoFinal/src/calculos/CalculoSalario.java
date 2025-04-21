@@ -1,5 +1,8 @@
 package calculos;
 
-public class CalculoSalario {
+import enumEinterface.CalcSalInterface;
+
+public class CalculoSalario implements CalcSalInterface{
+	
 
 }
