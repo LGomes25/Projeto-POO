@@ -20,30 +20,30 @@ public class CsvImport {
 
 	public static void importar(List<Pessoa> listaPessoas, List<Funcionario> listaFuncionarios,
 			List<Parentesco> listaDependentes) throws CpfDuplicado, IdadeInvalida, ArquivoNaoEncontrado {
+		
 		Scanner sc = new Scanner(System.in);
+		
 		Set<String> cpfsUnicos = new HashSet<>(); // Para garantir unicidade dos CPFs
 
 		try {
 			System.out.println("Digite o caminho do arquivo: ");
 			String nomeArquivo = sc.next();
 
-			// Verificar se o arquivo existe e lançar a exceção personalizada se não
-			// encontrado
+			// Verificar se o arquivo existe 
 			try {
 				FileReader file = new FileReader(nomeArquivo);
-				@SuppressWarnings("resource")
+				@SuppressWarnings("resource")//sc2 nunca fecha
 				Scanner sc2 = new Scanner(file);
 
 				while (sc2.hasNextLine()) {
 					String linha = sc2.nextLine();
 
-					if (linha.isEmpty()) {
-						continue; // Ignorar linhas em branco
+					if (linha.isEmpty()) {// Ignorar linhas em branco
+						continue; 
 					}
 
 					String[] dados = linha.split(";");
 
-					// Dados comuns para funcionário e dependente
 					String nome = dados[0];
 					String cpf = dados[1];
 					LocalDate dataNascimento = LocalDate.of(Integer.parseInt(dados[2].substring(0, 4)),

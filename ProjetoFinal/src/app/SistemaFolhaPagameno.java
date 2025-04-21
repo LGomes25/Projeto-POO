@@ -6,6 +6,7 @@ import java.util.List;
 import classes.Funcionario;
 import classes.Parentesco;
 import classes.Pessoa;
+import csv.CsvExport;
 import csv.CsvImport;
 
 public class SistemaFolhaPagameno {
@@ -18,13 +19,17 @@ public class SistemaFolhaPagameno {
 
 		
 	    try {
-			//Método para importar arquivo csv
+			//Importar arquivo csv
 	    	CsvImport.importar(listaPessoas, listaFuncionarios, listaDependentes);
 		
-	    	 // Exibição das listas
+	    	// Exibição das listas
 	    	CsvImport.exibirListaPessoa(listaPessoas);
 	    	CsvImport.exibirListaFuncionario(listaFuncionarios);
 	    	CsvImport.exibirListaDependentes(listaDependentes);
+	    	
+	    	//Exportar arquivo csv
+	    	CsvExport.exportFuncionario(listaFuncionarios);
+	    	CsvExport.exportDependentes(listaDependentes);
 	   
 	    } catch (Exception e) {
 	        // Captura todas as exceções lançadas pelo método chamado
