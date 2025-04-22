@@ -26,7 +26,6 @@ public class FolhaPagamento extends Funcionario implements CalcSalInterface {
 		//super.atualizarDesconto();
 	}
 	
-
 	private Double calcularINSS() {
 		if (getSalarioBruto() <= 1518.0) {
 			Double faixa1 = (getSalarioBruto() * 0.075 - (contadorDependente() * calcularDescontoDependentes()));

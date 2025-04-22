@@ -1,5 +1,6 @@
 package app;
 
+import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,6 +8,7 @@ import calculos.FolhaPagamento;
 import classes.Dependente;
 import classes.Funcionario;
 import classes.Pessoa;
+import conexao.ConexaoBd;
 import csv.CsvExport;
 import csv.CsvImport;
 
@@ -41,7 +43,11 @@ public class SistemaFolhaPagameno {
 	    	CsvExport.exportFuncionario(listaFuncionarios);
 	    	CsvExport.exportDependentes(listaDependentes);
 	    	CsvExport.exportFolha(listafolha);
-	   
+	    	
+	    	//Conexão BD
+	    	@SuppressWarnings("unused")
+	        Connection connection = new ConexaoBd().getConnection();
+	    	
 	    } catch (Exception e) {
 	        // Captura todas as exceções lançadas pelo método chamado
 	        System.out.println("Erro ao processar o arquivo: " + e.getMessage());
