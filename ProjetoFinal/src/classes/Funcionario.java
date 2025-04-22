@@ -5,12 +5,10 @@ import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 
-//import calculos.FolhaPagamento;
+import enumEinterface.CalcSalInterface;
+import enumEinterface.ParentescoEnum;
 
-
-
-
-public class Funcionario extends Pessoa {
+public class Funcionario extends Pessoa implements CalcSalInterface{
 
 	// Atributos
 	protected Double salarioBruto;
@@ -23,7 +21,7 @@ public class Funcionario extends Pessoa {
 	public Funcionario(Integer id, String nome, String cpf, LocalDate dataNascimento, Double salarioBruto) {
 		super(id, nome, cpf, dataNascimento);
 		this.salarioBruto = salarioBruto;
-		this.descontoInss = 0.;
+		//this.descontoInss = 0.;
 		this.descontoIr = 0.;
 		this.salarioLiquido = 0.;
 	}
@@ -72,15 +70,42 @@ public class Funcionario extends Pessoa {
 
 	public void adicionarDependente(Dependente dependente) {
 		if (Period.between(dataNascimento, LocalDate.now()).getYears() < 18) {
-		
 			dependentes.add(dependente);
 		}
-		
-		
 	}
 	
 	public int contadorDependente() {
 		int contador = dependentes.size();
 		return contador;
 	}
+
+	@Override
+	public void atualizarDesconto() {
+		descontoInss = calcularINSS();
+	}
+
+	private Double calcularINSS() {
+		if (salarioBruto <= 1518.0) {
+			Double faixa1 = (salarioBruto * 0.075 - (contadorDependente() * calcularDescontoDependentes()));
+			return faixa1;
+		} else if (salarioBruto >= 1518.01 && salarioBruto <= 2793.88) {
+			Double faixa2 = (salarioBruto * 0.09 - (contadorDependente() * calcularDescontoDependentes()));
+			return faixa2;
+		} else if (salarioBruto >= 2793.89 && salarioBruto <= 4190.83) {
+			Double faixa3 = (salarioBruto * 0.12 - (contadorDependente() * calcularDescontoDependentes()));
+			return faixa3;
+		} else if (salarioBruto >= 4190.84 && salarioBruto <= 8157.41) {
+			Double faixa4 = (salarioBruto * 0.14 - (contadorDependente() * calcularDescontoDependentes()));
+			return faixa4;
+		} else {
+			Double faixa5 = (8157.41 * 0.14 - (contadorDependente() * calcularDescontoDependentes()));
+			return faixa5;
+		}
+	}
+
+	public Double calcularDescontoDependentes() {
+		Double descontoDependente = ParentescoEnum.FILHO.getDesconto();
+		return descontoDependente;
+	}
+
 }
