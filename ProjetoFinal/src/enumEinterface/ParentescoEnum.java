@@ -7,15 +7,15 @@ public enum ParentescoEnum {
     OUTROS(189.59);     
 
 	//Declaracao atributo
-    private double desconto; 
+    private Double desconto; 
 
     // Construtor
-    private ParentescoEnum(double desconto) {
+    private ParentescoEnum(Double desconto) {
         this.desconto = desconto;
     }
 
     // Método
-    public double getDesconto() {
+    public Double getDesconto() {
         return desconto;
     }
 

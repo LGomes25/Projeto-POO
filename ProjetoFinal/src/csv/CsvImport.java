@@ -9,7 +9,7 @@ import java.util.Scanner;
 import java.util.Set;
 
 import classes.Funcionario;
-import classes.Parentesco;
+import classes.Dependente;
 import classes.Pessoa;
 import enumEinterface.ParentescoEnum;
 import exceptions.ArquivoNaoEncontrado;
@@ -19,7 +19,7 @@ import exceptions.IdadeInvalida;
 public class CsvImport {
 
 	public static void importar(List<Pessoa> listaPessoas, List<Funcionario> listaFuncionarios,
-			List<Parentesco> listaDependentes) throws CpfDuplicado, IdadeInvalida, ArquivoNaoEncontrado {
+			List<Dependente> listaDependentes) throws CpfDuplicado, IdadeInvalida, ArquivoNaoEncontrado {
 		
 		Scanner sc = new Scanner(System.in);
 		
@@ -69,7 +69,7 @@ public class CsvImport {
 							throw new IdadeInvalida("Dependente inválido (18 anos ou mais): " + nome);
 						}
 
-						Parentesco dependente = new Parentesco(listaDependentes.size() + 1, nome, cpf, dataNascimento,
+						Dependente dependente = new Dependente(listaDependentes.size() + 1, nome, cpf, dataNascimento,
 								parentesco);
 						listaPessoas.add(dependente);
 						listaDependentes.add(dependente);
@@ -96,7 +96,7 @@ public class CsvImport {
 		for (Pessoa pessoa : listaPessoas) {
 			if (pessoa instanceof Funcionario) {
 				System.out.println("Funcionário:");
-			} else if (pessoa instanceof Parentesco) {
+			} else if (pessoa instanceof Dependente) {
 				System.out.println("Dependente:");
 			}
 			System.out.println(pessoa);
@@ -112,9 +112,9 @@ public class CsvImport {
 	}
 
 	// Método lista de Dependentes
-	public static void exibirListaDependentes(List<Parentesco> listaDependentes) {
+	public static void exibirListaDependentes(List<Dependente> listaDependentes) {
 		System.out.println("--------------------- Lista de Dependentes ---------------------");
-		for (Parentesco dependente : listaDependentes) {
+		for (Dependente dependente : listaDependentes) {
 			System.out.println(dependente);
 		}
 	}

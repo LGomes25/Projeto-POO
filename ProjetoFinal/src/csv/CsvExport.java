@@ -6,7 +6,7 @@ import java.io.PrintWriter;
 import java.util.List;
 
 import classes.Funcionario;
-import classes.Parentesco;
+import classes.Dependente;
 
 public class CsvExport {
 
@@ -29,14 +29,14 @@ public class CsvExport {
 
 	}
 	
-	public static void exportDependentes(List<Parentesco> listaDependentes) {
+	public static void exportDependentes(List<Dependente> listaDependentes) {
 
 		FileWriter fw;
 		try {
 			fw = new FileWriter("/serratec-2025-1/curso/dependentes.csv");
 			PrintWriter pw = new PrintWriter(fw);
 
-			for (Parentesco dep : listaDependentes) {
+			for (Dependente dep : listaDependentes) {
 				String linha = dep.getNome() + " ; " + dep.getCpf() + " ; " + dep.getDataNascimento() + " ; "
 						+ dep.getParentesco() + "\n";
 				pw.printf(linha);
