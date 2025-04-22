@@ -21,9 +21,12 @@ public class FolhaPagamento extends Funcionario implements CalcSalInterface {
 
 	@Override
 	public void atualizarDesconto() {
-		double desconto = calcularINSS();
-		setDescontoInss(desconto);
-		//super.atualizarDesconto();
+		Double descontoinss = calcularINSS();
+		Double descontoir = calcularIR();
+		Double salarioliquidofinal = calcularSalarioLiquido();
+		setDescontoInss(descontoinss);
+		setDescontoIr(descontoir);
+		setSalarioLiquido(salarioliquidofinal);
 	}
 	
 	private Double calcularINSS() {
@@ -44,6 +47,34 @@ public class FolhaPagamento extends Funcionario implements CalcSalInterface {
 			return faixa5;
 		}
 	}
+	
+	private Double calcularIR() {
+		if (getSalarioBruto() <= 2259.00) {
+			Double faixair0 = 0.0;
+			return faixair0;
+		} else if (getSalarioBruto() >= 2259.21 && getSalarioBruto() <= 2826.65){
+			Double faixair1 = (((getSalarioBruto() - (contadorDependente()
+					* calcularDescontoDependentes()) - getDescontoInss()) * 0.075) - 169.44);
+			return faixair1;
+		} else if(getSalarioBruto() >= 2826.66 && getSalarioBruto() <= 3751.05) {
+			Double faixair2 = (((getSalarioBruto() - (contadorDependente()
+					* calcularDescontoDependentes()) - getDescontoInss()) * 0.15) - 381.44);
+			return faixair2;
+		} else if(getSalarioBruto() >= 3751.06 && getSalarioBruto() <= 4664.68) {
+			Double faixair3 = (((getSalarioBruto() - (contadorDependente()
+					* calcularDescontoDependentes()) - getDescontoInss()) * 0.225) - 662.77);
+			return faixair3;
+		} else {
+			Double faixair4 = (((getSalarioBruto() - (contadorDependente()
+					* calcularDescontoDependentes()) - getDescontoInss()) * 0.275) - 896.00);
+			return faixair4;
+		}	
+	}
+	 private Double calcularSalarioLiquido() {
+		 Double salarioliquido = getSalarioBruto() - calcularINSS() - calcularIR();
+		 return salarioliquido;
+		 
+	 }
 
 	public Double calcularDescontoDependentes() {
 		Double descontoDependente = ParentescoEnum.FILHO.getDesconto();
