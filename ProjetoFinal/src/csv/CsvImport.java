@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.Set;
 
+import calculos.FolhaPagamento;
 import classes.Funcionario;
 import classes.Dependente;
 import classes.Pessoa;
@@ -19,27 +20,28 @@ import exceptions.IdadeInvalida;
 public class CsvImport {
 
 	public static void importar(List<Pessoa> listaPessoas, List<Funcionario> listaFuncionarios,
-			List<Dependente> listaDependentes) throws CpfDuplicado, IdadeInvalida, ArquivoNaoEncontrado {
-		
+			List<Dependente> listaDependentes, List<FolhaPagamento> listafolha)
+			throws CpfDuplicado, IdadeInvalida, ArquivoNaoEncontrado {
+
 		Scanner sc = new Scanner(System.in);
-		
+
 		Set<String> cpfsUnicos = new HashSet<>(); // Para garantir unicidade dos CPFs
 
 		try {
 			System.out.println("Digite o caminho do arquivo: ");
 			String nomeArquivo = sc.next();
 
-			// Verificar se o arquivo existe 
+			// Verificar se o arquivo existe
 			try {
 				FileReader file = new FileReader(nomeArquivo);
-				@SuppressWarnings("resource")//sc2 nunca fecha
+				@SuppressWarnings("resource") // sc2 nunca fecha
 				Scanner sc2 = new Scanner(file);
 
 				while (sc2.hasNextLine()) {
 					String linha = sc2.nextLine();
 
 					if (linha.isEmpty()) {// Ignorar linhas em branco
-						continue; 
+						continue;
 					}
 
 					String[] dados = linha.split(";");
@@ -61,6 +63,11 @@ public class CsvImport {
 								dataNascimento, salario);
 						listaPessoas.add(funcionario);
 						listaFuncionarios.add(funcionario);
+
+						FolhaPagamento folhaPagamento = new FolhaPagamento(funcionario.getId(), funcionario.getNome(),
+								funcionario.getCpf(), funcionario.getDataNascimento(), funcionario.getSalarioBruto());
+						listafolha.add(folhaPagamento);
+
 					} else { // Dependente identificado pelo parentesco
 						ParentescoEnum parentesco = ParentescoEnum.valueOf(dados[3]);
 
@@ -92,7 +99,7 @@ public class CsvImport {
 
 	// Método lista completa de Pessoa
 	public static void exibirListaPessoa(List<Pessoa> listaPessoas) {
-		System.out.println("--------------------- Lista Completa de Pessoas ---------------------");
+		System.out.println("\n--------------------- Lista Completa de Pessoas ---------------------");
 		for (Pessoa pessoa : listaPessoas) {
 			if (pessoa instanceof Funcionario) {
 				System.out.println("Funcionário:");
@@ -105,7 +112,7 @@ public class CsvImport {
 
 	// Método lista de Funcionários
 	public static void exibirListaFuncionario(List<Funcionario> listaFuncionarios) {
-		System.out.println("--------------------- Lista de Funcionários ---------------------");
+		System.out.println("\n--------------------- Lista de Funcionários ---------------------");
 		for (Funcionario funcionario : listaFuncionarios) {
 			System.out.println(funcionario);
 		}
@@ -113,9 +120,17 @@ public class CsvImport {
 
 	// Método lista de Dependentes
 	public static void exibirListaDependentes(List<Dependente> listaDependentes) {
-		System.out.println("--------------------- Lista de Dependentes ---------------------");
+		System.out.println("\n--------------------- Lista de Dependentes ---------------------");
 		for (Dependente dependente : listaDependentes) {
 			System.out.println(dependente);
+		}
+	}
+
+	// Método lista folha pgmt
+	public static void exibirListafolha(List<FolhaPagamento> listafolha) {
+		System.out.println("\n--------------------- Lista Folha ---------------------");
+		for (FolhaPagamento folha : listafolha) {
+			System.out.println(folha);
 		}
 	}
 
