@@ -1,14 +1,23 @@
 package classes;
 
 import java.time.LocalDate;
+import java.time.Period;
+import java.util.ArrayList;
+import java.util.List;
+
+//import calculos.FolhaPagamento;
+
+
+
 
 public class Funcionario extends Pessoa {
 
 	// Atributos
-	private Double salarioBruto;
-	private Double descontoInss;
-	private Double descontoIr;
-	private Double salarioLiquido;
+	protected Double salarioBruto;
+	protected Double descontoInss;
+	protected Double descontoIr;
+	protected Double salarioLiquido;
+	protected List<Dependente> dependentes = new ArrayList<>();
 
 	// Construtor
 	public Funcionario(Integer id, String nome, String cpf, LocalDate dataNascimento, Double salarioBruto) {
@@ -39,6 +48,7 @@ public class Funcionario extends Pessoa {
 		return descontoInss;
 	}
 
+	
 	public void setDescontoInss(Double descontoInss) {
 		this.descontoInss = descontoInss;
 	}
@@ -59,4 +69,18 @@ public class Funcionario extends Pessoa {
 		this.salarioLiquido = salarioLiquido;
 	}
 
+
+	public void adicionarDependente(Dependente dependente) {
+		if (Period.between(dataNascimento, LocalDate.now()).getYears() < 18) {
+		
+			dependentes.add(dependente);
+		}
+		
+		
+	}
+	
+	public int contadorDependente() {
+		int contador = dependentes.size();
+		return contador;
+	}
 }
