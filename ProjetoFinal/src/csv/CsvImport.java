@@ -93,7 +93,7 @@ public class CsvImport {
 		} catch (CpfDuplicado | IdadeInvalida | ArquivoNaoEncontrado e) {
 			System.out.println("Erro ao processar o arquivo: " + e.getMessage());
 		} finally {
-			sc.close();
+			//sc.close();
 		}
 	}
 
