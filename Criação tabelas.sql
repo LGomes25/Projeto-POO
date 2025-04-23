@@ -3,7 +3,7 @@ id SERIAL primary key,
 nome VARCHAR (100) not null,
 cpf VARCHAR (11) unique not null,
 datanascimento DATE  not null,
-status VARCHAR(20) CHECK (status IN ('filho', 'sobrinho', 'outros')) NOT NULL
+status VARCHAR(20) CHECK (status IN ('FILHO', 'SOBRINHO', 'OUTROS')) NOT NULL
 );
 
 create table folhapagamento(
@@ -33,5 +33,13 @@ cpf VARCHAR (11) unique NOT NULL,
 datanascimento DATE NOT NULL
 );
 
+SELECT * FROM DEPENDENTES, folhapagamento, funcionario
 
+ALTER TABLE dependentes DROP CONSTRAINT dependentes_status_check;
 
+ALTER TABLE dependentes ADD CONSTRAINT dependentes_status_check
+CHECK (status IN ('FILHO', 'SOBRINHO', 'OUTROS'));
+
+TRUNCATE TABLE dependentes;
+TRUNCATE TABLE folhapagamento;
+TRUNCATE TABLE funcionario;

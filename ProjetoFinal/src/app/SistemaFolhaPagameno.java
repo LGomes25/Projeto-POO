@@ -1,14 +1,15 @@
 package app;
 
-import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
 
+import Persistence.DependenteDao;
+import Persistence.FolhaDePagamentoDao;
+import Persistence.FuncionarioDao;
 import calculos.FolhaPagamento;
 import classes.Dependente;
 import classes.Funcionario;
 import classes.Pessoa;
-import conexao.ConexaoBd;
 import csv.CsvExport;
 import csv.CsvImport;
 
@@ -21,16 +22,31 @@ public class SistemaFolhaPagameno {
 	    List<Dependente> listaDependentes = new ArrayList<>();
 	    List<FolhaPagamento> listafolha = new ArrayList<>();
 		
+	    
 	    try {
 			//Importar arquivo csv
 	    	CsvImport.importar(listaPessoas, listaFuncionarios, listaDependentes, listafolha);
 	
+	    	//Calcular Folha
 	    	for (FolhaPagamento folha : listafolha) {
 	            folha.atualizarDesconto();
 	    	}
-	    	
 	    	for (Funcionario funcionarios : listaFuncionarios) {
 	    	    funcionarios.atualizarDesconto();
+	    	}
+	    	
+	    	//Exportar para BD
+	    	DependenteDao dependenteDao = new DependenteDao();
+	    	for (Dependente dep : listaDependentes) {
+				dependenteDao.inserir(dep);
+			}
+	    	FuncionarioDao funcionarioDao = new FuncionarioDao();
+	    	for (Funcionario fun : listaFuncionarios) {
+	    		funcionarioDao.inserir(fun);
+	    	}
+	    	FolhaDePagamentoDao folhaDao = new FolhaDePagamentoDao();
+	    	for (FolhaPagamento fol : listafolha) {
+	    		folhaDao.inserir(fol);
 	    	}
 	    	
 	    	// Exibição das listas
@@ -44,12 +60,8 @@ public class SistemaFolhaPagameno {
 	    	CsvExport.exportDependentes(listaDependentes);
 	    	CsvExport.exportFolha(listafolha);
 	    	
-	    	//Conexão BD
-	    	@SuppressWarnings("unused")
-	        Connection connection = new ConexaoBd().getConnection();
 	    	
 	    } catch (Exception e) {
-	        // Captura todas as exceções lançadas pelo método chamado
 	        System.out.println("Erro ao processar o arquivo: " + e.getMessage());
 	    }
 	        
