@@ -4,24 +4,24 @@ import java.time.LocalDate;
 
 import enumEinterface.ParentescoEnum;
 
-public class Dependente extends Pessoa{
+public class Dependente extends Pessoa {
 
-	//Atributos 
+	// Atributos
 	private ParentescoEnum parentesco;
 
-	//Construtor
+	// Construtor
 	public Dependente(Integer id, String nome, String cpf, LocalDate dataNascimento, ParentescoEnum parentesco) {
 		super(id, nome, cpf, dataNascimento);
 		this.parentesco = parentesco;
 	}
 
-	//toString
+	// toString
 	@Override
 	public String toString() {
 		return super.toString() + "Parentesco: " + parentesco;
 	}
 
-	//Getters Setters
+	// Getters Setters
 	public ParentescoEnum getParentesco() {
 		return parentesco;
 	}
@@ -29,9 +29,4 @@ public class Dependente extends Pessoa{
 	public void setParentesco(ParentescoEnum parentesco) {
 		this.parentesco = parentesco;
 	}
-
-	
-	
-	 
-	
 }

@@ -7,7 +7,7 @@ package conexao;
 	
 	private String url = "jdbc:postgresql://localhost:5432/POO-FINAL-POSTGREE";
 	private String username = "postgres";
-	private String password = "123456";
+	private String password = "******";
 
 	public Connection getConnection() {
 	System.out.println("Fazendo a conexão....");

@@ -13,24 +13,18 @@ public class DependenteDao {
     }
 
     public void inserir(Dependente dependente) {
-        String sql = "INSERT INTO dependente(id, nome, cpf, data_nascimento, status) VALUES (?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO dependentes (nome, cpf, datanascimento, status) VALUES (?, ?, ?, ?)";
         try {
             PreparedStatement stmt = connection.prepareStatement(sql);
-            stmt.setInt(1, dependente.getId());
-            stmt.setString(2, dependente.getNome());
-            stmt.setString(3, dependente.getCpf());
-            stmt.setDate(4, java.sql.Date.valueOf(dependente.getDataNascimento()));
-            stmt.setString(5, dependente.getParentesco().name());
+            stmt.setString(1, dependente.getNome());
+            stmt.setString(2, dependente.getCpf());
+            stmt.setDate(3, java.sql.Date.valueOf(dependente.getDataNascimento()));
+            stmt.setString(4, dependente.getParentesco().name());
             stmt.execute();
             System.out.println("Dependente cadastrado com sucesso!");
         } catch (Exception e) {
-            System.err.println("Dependente não cadastrada!");
+            System.err.println("Dependente não cadastrado !!!");
         }
     }
 
-//    public static void main(String[] args) {
-//        DependenteDao daoPessoaDao = new DependenteDao();
-//        Pessoa pessoa = new Pessoa(1, "Taiane", "00000000000", LocalDate.parse("2025/04/22", "Parentesco"));
-//        dao.inserir(pessoa);
-//    }
 }
