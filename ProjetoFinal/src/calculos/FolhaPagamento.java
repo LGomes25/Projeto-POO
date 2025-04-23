@@ -48,6 +48,7 @@ public class FolhaPagamento extends Funcionario implements CalcSalInterface {
 		}
 	}
 	
+
 	private Double calcularIR() {
 		if (getSalarioBruto() <= 2259.00) {
 			Double faixair0 = 0.0;
@@ -75,6 +76,7 @@ public class FolhaPagamento extends Funcionario implements CalcSalInterface {
 		 return salarioliquido;
 		 
 	 }
+
 
 	public Double calcularDescontoDependentes() {
 		Double descontoDependente = ParentescoEnum.FILHO.getDesconto();
