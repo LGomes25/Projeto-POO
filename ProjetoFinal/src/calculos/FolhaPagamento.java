@@ -11,13 +11,13 @@ public class FolhaPagamento extends Funcionario implements CalcSalInterface {
 	// atributos
 	private Integer id;
 	private LocalDate dataPagamento;
-	
+	private int contdependente2; //->contador dependentes
 
 	// construtor
 	public FolhaPagamento(Integer id, String nome, String cpf, LocalDate dataNascimento, Double salarioBruto) {
 		super(id, nome, cpf, dataNascimento, salarioBruto);
 		this.dataPagamento = LocalDate.now();
-		
+		this.contdependente2 = 0;
 
 	}
 
@@ -34,19 +34,19 @@ public class FolhaPagamento extends Funcionario implements CalcSalInterface {
 	
 	private Double calcularINSS() {
 		if (getSalarioBruto() <= 1518.0) {
-			Double faixa1 = Math.round((getSalarioBruto() * 0.075 - (getContdependente() * calcularDescontoDependentes())) * 100.0) / 100.0;
+			Double faixa1 = Math.round((getSalarioBruto() * 0.075 - (contdependente2 * calcularDescontoDependentes())) * 100.0) / 100.0;
 			return faixa1;
 		} else if (getSalarioBruto() >= 1518.01 && getSalarioBruto() <= 2793.88) {
-			Double faixa2 = Math.round((getSalarioBruto() * 0.09 - (getContdependente() * calcularDescontoDependentes())) * 100.0) / 100.0;
+			Double faixa2 = Math.round((getSalarioBruto() * 0.09 - (contdependente2 * calcularDescontoDependentes())) * 100.0) / 100.0;
 			return faixa2;
 		} else if (getSalarioBruto() >= 2793.89 && getSalarioBruto() <= 4190.83) {
-			Double faixa3 = Math.round((getSalarioBruto() * 0.12 - (getContdependente() * calcularDescontoDependentes())) * 100.0) / 100.0;
+			Double faixa3 = Math.round((getSalarioBruto() * 0.12 - (contdependente2 * calcularDescontoDependentes())) * 100.0) / 100.0;
 			return faixa3;
 		} else if (getSalarioBruto() >= 4190.84 && getSalarioBruto() <= 8157.41) {
-			Double faixa4 = Math.round((getSalarioBruto() * 0.14 - (getContdependente() * calcularDescontoDependentes())) * 100.0) / 100.0;
+			Double faixa4 = Math.round((getSalarioBruto() * 0.14 - (contdependente2 * calcularDescontoDependentes())) * 100.0) / 100.0;
 			return faixa4;
 		} else {
-			Double faixa5 = Math.round((8157.41 * 0.14 - (getContdependente() * calcularDescontoDependentes())) * 100.0) / 100.0;
+			Double faixa5 = Math.round((8157.41 * 0.14 - (contdependente2 * calcularDescontoDependentes())) * 100.0) / 100.0;
 			return faixa5;
 		}
 	}
@@ -57,19 +57,19 @@ public class FolhaPagamento extends Funcionario implements CalcSalInterface {
 			Double faixair0 = 0.0;
 			return faixair0;
 		} else if (getSalarioBruto() >= 2259.21 && getSalarioBruto() <= 2826.65){
-			Double faixair1 = Math.round((((getSalarioBruto() - (getContdependente()
+			Double faixair1 = Math.round((((getSalarioBruto() - (contdependente2
 					* calcularDescontoDependentes()) - getDescontoInss()) * 0.075) - 169.44) * 100.0 ) / 100.0;
 			return faixair1;
 		} else if(getSalarioBruto() >= 2826.66 && getSalarioBruto() <= 3751.05) {
-			Double faixair2 = Math.round((((getSalarioBruto() - (getContdependente()
+			Double faixair2 = Math.round((((getSalarioBruto() - (contdependente2
 					* calcularDescontoDependentes()) - getDescontoInss()) * 0.15) - 381.44) * 100.0) / 100.0;
 			return faixair2;
 		} else if(getSalarioBruto() >= 3751.06 && getSalarioBruto() <= 4664.68) {
-			Double faixair3 = Math.round((((getSalarioBruto() - (getContdependente()
+			Double faixair3 = Math.round((((getSalarioBruto() - (contdependente2
 					* calcularDescontoDependentes()) - getDescontoInss()) * 0.225) - 662.77) * 100.0) / 100.0;
 			return faixair3;
 		} else {
-			Double faixair4 = Math.round((((getSalarioBruto() - (getContdependente()
+			Double faixair4 = Math.round((((getSalarioBruto() - (contdependente2
 					* calcularDescontoDependentes()) - getDescontoInss()) * 0.275) - 896.00) * 100.0) / 100.0;
 			return faixair4;
 		}	
@@ -81,7 +81,6 @@ public class FolhaPagamento extends Funcionario implements CalcSalInterface {
 
 	public Double calcularDescontoDependentes() {
 		Double descontoDependente = ParentescoEnum.FILHO.getDesconto();
-		//System.out.println(dependente);<- teste de contador
 		return descontoDependente;
 	}
 
@@ -101,4 +100,14 @@ public class FolhaPagamento extends Funcionario implements CalcSalInterface {
 	public void setDataPagamento(LocalDate dataPagamento) {
 		this.dataPagamento = dataPagamento;
 	}
+
+	public int getContdependente2() {
+		return contdependente2;
+	}
+
+	public void setContdependente2(int contdependente2) {
+		this.contdependente2 = contdependente2;
+		System.out.println(contdependente2);
+	}
+	
 }
