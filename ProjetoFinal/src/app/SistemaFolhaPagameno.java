@@ -19,6 +19,8 @@ public class SistemaFolhaPagameno {
 
 	public static void main(String[] args) {
 		
+		System.out.println("teste branch local");
+		
 		List<Pessoa> listaPessoas = new ArrayList<>();
 		List<Funcionario> listaFuncionarios = new ArrayList<>();
 		List<Dependente> listaDependentes = new ArrayList<>();
