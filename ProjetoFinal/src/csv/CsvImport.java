@@ -47,6 +47,12 @@ public class CsvImport {
 						if (!listaFuncionarios.isEmpty()) {//Add dependentes
 							listaFuncionarios.get(listaFuncionarios.size() - 1).setContdependente(contdependente);
 						}
+						if (!listafolha.isEmpty()) {//Add dependentes
+							listafolha.get(listafolha.size() - 1).setContdependente(contdependente);
+						}
+						
+						
+						
 						//System.out.println(listaFuncionarios.get(listaFuncionarios.size()-1) + " - " +contdependente);
 						continue;
 					}

@@ -100,20 +100,20 @@ public class Funcionario extends Pessoa implements CalcSalInterface{
 	}
 
 	private Double calcularINSS() {
-		if (getSalarioBruto() <= 1518.0) {
-			Double faixa1 = Math.round((salarioBruto * 0.075 - (contdependente * calcularDescontoDependentes())) * 100.0) / 100.0;
+		if (salarioBruto <= 1518.0) {
+			Double faixa1 = (salarioBruto * 0.075) - (2 * 189.59);
 			return faixa1;
 		} else if (salarioBruto >= 1518.01 && salarioBruto <= 2793.88) {
-			Double faixa2 = Math.round((salarioBruto * 0.09 - (contdependente * calcularDescontoDependentes())) * 100.0) / 100.0;
+			Double faixa2 = Math.round((salarioBruto * 0.09 - (contdependente * 189.59)) * 100.0) / 100.0;
 			return faixa2;
 		} else if (salarioBruto >= 2793.89 && salarioBruto <= 4190.83) {
-			Double faixa3 = Math.round((salarioBruto * 0.12 - (contdependente * calcularDescontoDependentes())) * 100.0) / 100.0;
+			Double faixa3 = Math.round((salarioBruto * 0.12 - (contdependente * 189.59)) * 100.0) / 100.0;
 			return faixa3;
 		} else if (salarioBruto >= 4190.84 && salarioBruto <= 8157.41) {
-			Double faixa4 = Math.round((salarioBruto * 0.14 - (contdependente * calcularDescontoDependentes())) * 100.0) / 100.0;
+			Double faixa4 = Math.round((salarioBruto * 0.14 - (contdependente * 189.59)) * 100.0) / 100.0;
 			return faixa4;
 		} else {
-			Double faixa5 = Math.round((8157.41 * 0.14 - (contdependente * calcularDescontoDependentes())) * 100.0) / 100.0;
+			Double faixa5 = Math.round((8157.41 * 0.14 - (contdependente * 189.59)) * 100.0) / 100.0;
 			return faixa5;
 		}
 	}
