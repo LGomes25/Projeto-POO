@@ -23,7 +23,9 @@ public class CsvImport {
 			List<Dependente> listaDependentes, List<FolhaPagamento> listafolha)
 			throws CpfDuplicado, IdadeInvalida, ArquivoNaoEncontrado {
 
+		@SuppressWarnings("resource")
 		Scanner sc = new Scanner(System.in);
+		int contdependente=0;//contador de dependente individual
 
 		Set<String> cpfsUnicos = new HashSet<>(); // Para garantir unicidade dos CPFs
 
@@ -41,6 +43,11 @@ public class CsvImport {
 					String linha = sc2.nextLine();
 
 					if (linha.isEmpty()) {// Ignorar linhas em branco
+					
+						if (!listaFuncionarios.isEmpty()) {//Add dependentes
+							listaFuncionarios.get(listaFuncionarios.size() - 1).setContdependente(contdependente);
+						}
+						//System.out.println(listaFuncionarios.get(listaFuncionarios.size()-1) + " - " +contdependente);
 						continue;
 					}
 
@@ -58,6 +65,7 @@ public class CsvImport {
 
 					// Condicional no último campo
 					if (dados[3].contains(".")) { // Funcionário identificado pelo salário bruto
+						contdependente = 0;
 						Double salario = Double.parseDouble(dados[3]);
 						Funcionario funcionario = new Funcionario(listaFuncionarios.size() + 1, nome, cpf,
 								dataNascimento, salario);
@@ -70,16 +78,18 @@ public class CsvImport {
 
 					} else { // Dependente identificado pelo parentesco
 						ParentescoEnum parentesco = ParentescoEnum.valueOf(dados[3]);
-
+						
 						// Validação de idade do dependente
 						if (LocalDate.now().getYear() - dataNascimento.getYear() >= 18) {
 							throw new IdadeInvalida("Dependente inválido (18 anos ou mais): " + nome);
 						}
-
+						
 						Dependente dependente = new Dependente(listaDependentes.size() + 1, nome, cpf, dataNascimento,
 								parentesco);
 						listaPessoas.add(dependente);
 						listaDependentes.add(dependente);
+						
+						contdependente++;
 					}
 				}
 				sc2.close();
@@ -92,9 +102,7 @@ public class CsvImport {
 
 		} catch (CpfDuplicado | IdadeInvalida | ArquivoNaoEncontrado e) {
 			System.out.println("Erro ao processar o arquivo: " + e.getMessage());
-		} finally {
-			//sc.close();
-		}
+		} 
 	}
 
 	// Método lista completa de Pessoa

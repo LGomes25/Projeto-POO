@@ -58,13 +58,13 @@ public class SistemaFolhaPagameno {
 						//Importar arquivo csv e atualiza os descontos
 						CsvImport.importar(listaPessoas, listaFuncionarios, listaDependentes, listafolha);
 						
+						for (Funcionario funcionarios : listaFuncionarios) {
+							funcionarios.atualizarDesconto();
+						}
 						for (FolhaPagamento folha : listafolha) {
 							folha.atualizarDesconto();
 						}
 
-						for (Funcionario funcionarios : listaFuncionarios) {
-							funcionarios.atualizarDesconto();
-						}
 						System.out.println("Dados importados e descontos atualizados!");
 						break;
 
