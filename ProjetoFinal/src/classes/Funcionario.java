@@ -1,6 +1,10 @@
 package classes;
 
 import java.time.LocalDate;
+import java.time.Period;
+import java.util.ArrayList;
+import java.util.List;
+
 import enumEinterface.CalcSalInterface;
 import enumEinterface.ParentescoEnum;
 
@@ -11,7 +15,8 @@ public class Funcionario extends Pessoa implements CalcSalInterface {
 	protected Double descontoInss;
 	protected Double descontoIr;
 	protected Double salarioLiquido;
-	protected int contdependente; 
+	protected int contdependente; // ->contador dependentes
+	protected List<Dependente> dependentes = new ArrayList<>();// -> não usado
 
 	// Construtor
 	public Funcionario(Integer id, String nome, String cpf, LocalDate dataNascimento, Double salarioBruto) {
@@ -70,7 +75,21 @@ public class Funcionario extends Pessoa implements CalcSalInterface {
 
 	public void setContdependente(int contdependente) {
 		this.contdependente = contdependente;
+		// System.out.println(this.contdependente);<-teste de contagem
 	}
+
+	// metodo para contar dependentes <-não utilizado
+	public int contadorDependente() {
+		int contador = contdependente;
+		return contador;
+	}
+
+	public void adicionarDependente(Dependente dependente) {// <-não utilizado
+		if (Period.between(dataNascimento, LocalDate.now()).getYears() < 18) {
+			dependentes.add(dependente);
+		}
+	}
+
 	@Override
 	public void atualizarDesconto() {
 		descontoInss = calcularINSS();
@@ -105,7 +124,7 @@ public class Funcionario extends Pessoa implements CalcSalInterface {
 
 	private Double calcularIR() {
 
-		Double descDep = contdependente * calcularDescontoDependentes();
+		Double descDep = contdependente * 189.59;
 		Double salBase = salarioBruto - descDep - calcularINSS();
 
 		if (salBase <= 2259.20) {

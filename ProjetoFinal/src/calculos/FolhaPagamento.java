@@ -64,7 +64,7 @@ public class FolhaPagamento extends Funcionario implements CalcSalInterface {
 
 	private Double calcularIR() {
 
-		Double descDep = contdependente2 * calcularDescontoDependentes();
+		Double descDep = contdependente2 * 189.59;
 		Double salBase = salarioBruto - descDep - this.calcularINSS();
 
 		if (salBase <= 2259.20) {
