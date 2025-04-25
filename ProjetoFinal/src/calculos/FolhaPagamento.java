@@ -118,7 +118,6 @@ public class FolhaPagamento extends Funcionario implements CalcSalInterface {
 
 	public void setContdependente2(int contdependente2) {
 		this.contdependente2 = contdependente2;
-		System.out.println(contdependente2);
 	}
 
 }
