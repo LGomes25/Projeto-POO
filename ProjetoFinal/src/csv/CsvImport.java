@@ -47,13 +47,9 @@ public class CsvImport {
 						if (!listaFuncionarios.isEmpty()) {//Add dependentes
 							listaFuncionarios.get(listaFuncionarios.size() - 1).setContdependente(contdependente);
 						}
-						if (!listafolha.isEmpty()) {//Add dependentes
+						if (!listafolha.isEmpty()) {//Add dependentes em
 							listafolha.get(listafolha.size() - 1).setContdependente(contdependente);
 						}
-						
-						
-						
-						//System.out.println(listaFuncionarios.get(listaFuncionarios.size()-1) + " - " +contdependente);
 						continue;
 					}
 
@@ -115,11 +111,6 @@ public class CsvImport {
 	public static void exibirListaPessoa(List<Pessoa> listaPessoas) {
 		System.out.println("\n--------------------- Lista Completa de Pessoas ---------------------");
 		for (Pessoa pessoa : listaPessoas) {
-			if (pessoa instanceof Funcionario) {
-				System.out.println("Funcionário:");
-			} else if (pessoa instanceof Dependente) {
-				System.out.println("Dependente:");
-			}
 			System.out.println(pessoa);
 		}
 	}
